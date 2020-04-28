@@ -55,6 +55,7 @@ class App extends React.Component {
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
+    this.search = this.search.bind(this);
   }
 
   addTrack(track) {
@@ -83,11 +84,15 @@ class App extends React.Component {
     /* generates an array of uri values called trackURIs from the playlistTracks property. */
   }
 
+  search(searchTerm) {
+    console.log(searchTerm);
+  }
+
   render() {
     return (
       <div>
         <div>
-          <SearchBar />
+          <SearchBar onSearch={this.search} />
         </div>
         <div>
           <SearchResults
