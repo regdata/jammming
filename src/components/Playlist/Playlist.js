@@ -24,6 +24,7 @@ class Playlist extends React.Component {
           onRemove={this.props.onRemove}
           isRemoval={true}
         />
+        <button onClick={this.props.onSave}>Save to Spotify</button>
       </div>
     );
   }
