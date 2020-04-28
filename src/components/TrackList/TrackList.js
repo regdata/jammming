@@ -1,26 +1,13 @@
 import React from 'react';
+import Track from '../Track/Track';
 
 class TrackList extends React.Component {
   render() {
     return (
-      /* This will be used to replace the hard-coded values once API pull is setup
-
       <div>
-        <ul>
-          {Track.map((track, i) => {
-            return <li key={'track_' + i}>{track}</li>;
-          })}
-        </ul>
-      </div>
-
-      */
-
-      <div>
-        <ul>
-          <li>Track Name, Track Artist, Track Album</li>
-          <li>Track Name, Track Artist, Track Album</li>
-          <li>Track Name, Track Artist, Track Album</li>
-        </ul>
+        {this.props.tracks.map(track => (
+          <Track track={track} key={track.id} />
+        ))}
       </div>
     );
   }

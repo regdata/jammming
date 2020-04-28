@@ -6,7 +6,7 @@ class Playlist extends React.Component {
     return (
       <div>
         <input type='text' defaultValue={'New Playlist'} />
-        <TrackList />
+        <TrackList tracks={this.props.playlistTracks} />
       </div>
     );
   }
