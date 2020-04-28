@@ -5,7 +5,11 @@ class SearchResults extends React.Component {
   render() {
     return (
       <div>
-        <TrackList tracks={this.props.searchResults} />
+        <TrackList
+          tracks={this.props.searchResults}
+          onAdd={this.props.onAdd}
+          isRemoval={false}
+        />
       </div>
     );
   }
