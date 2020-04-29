@@ -1,4 +1,4 @@
-const clientId = 'e623c5fa27704f959080cea5eb667bc2';
+const clientId = process.env.REACT_APP_CLIENT_ID;
 const redirectUri = 'http://regjams.surge.sh';
 let accessToken;
 
