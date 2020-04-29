@@ -63,6 +63,10 @@ class App extends React.Component {
   }
 
   render() {
+    let isSearchResults = this.state.searchResults.length === 0 ? false : true;
+    let isPlaylistTracks =
+      this.state.playlistTracks.length === 0 ? false : true;
+
     return (
       <div>
         <h1>
@@ -71,17 +75,21 @@ class App extends React.Component {
         <div className='App'>
           <SearchBar onSearch={this.search} />
           <div className='App-playlist'>
-            <SearchResults
-              searchResults={this.state.searchResults}
-              onAdd={this.addTrack}
-            />
-            <Playlist
-              playlistName={this.state.playlistName}
-              playlistTracks={this.state.playlistTracks}
-              onRemove={this.removeTrack}
-              onNameChange={this.updatePlaylistName}
-              onSave={this.savePlaylist}
-            />
+            {isSearchResults && (
+              <SearchResults
+                searchResults={this.state.searchResults}
+                onAdd={this.addTrack}
+              />
+            )}
+            {isPlaylistTracks && (
+              <Playlist
+                playlistName={this.state.playlistName}
+                playlistTracks={this.state.playlistTracks}
+                onRemove={this.removeTrack}
+                onNameChange={this.updatePlaylistName}
+                onSave={this.savePlaylist}
+              />
+            )}
           </div>
         </div>
       </div>
