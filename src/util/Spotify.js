@@ -1,5 +1,5 @@
 const clientId = 'e623c5fa27704f959080cea5eb667bc2';
-const redirectUri = 'http://localhost:3000';
+const redirectUri = 'http://regjams.surge.sh';
 let accessToken;
 
 const Spotify = {
