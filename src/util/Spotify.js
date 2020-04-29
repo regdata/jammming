@@ -20,18 +20,21 @@ const Spotify = {
       window.history.pushState('Access Token', null, '/');
       return accessToken;
     } else {
-      const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+      const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=playlist-modify-public`;
       window.location = accessUrl;
     }
   },
 
   search(searchTerm) {
     const accessToken = Spotify.getAccessToken();
-    fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
+    return fetch(
+      `https://api.spotify.com/v1/search?type=track&q=${searchTerm}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    )
       .then(response => response.json())
       .then(jsonResponse => {
         if (!jsonResponse.tracks) {
@@ -40,15 +43,15 @@ const Spotify = {
         return jsonResponse.tracks.items.map(track => ({
           id: track.id,
           name: track.name,
-          artist: track.artist[0].name,
+          artist: track.artists[0].name,
           album: track.album.name,
           uri: track.uri,
         }));
       });
   },
 
-  savePlaylist(playlistName, trackUris) {
-    if (!playlistName || !trackUris.length) {
+  savePlaylist(name, trackUris) {
+    if (!name || !trackUris.length) {
       return;
     }
     const accessToken = Spotify.getAccessToken();
@@ -61,9 +64,9 @@ const Spotify = {
         return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
           headers: headers,
           method: 'POST',
-          body: JSON.stringify({ name: playlistName }),
+          body: JSON.stringify({ name: name }),
         })
-          .then(response => response.JSON())
+          .then(response => response.json())
           .then(jsonResponse => {
             const playlistId = jsonResponse.id;
             return fetch(
